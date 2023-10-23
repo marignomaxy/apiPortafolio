@@ -19,7 +19,9 @@ app.set("view engine", "jade");
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Permite solicitudes desde este origen
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "*",
   })
 );
 
