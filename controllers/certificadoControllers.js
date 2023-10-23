@@ -58,7 +58,7 @@ module.exports = {
       let certificados = await modeloCertificados.getAll();
       certificados = certificados.map((certificado) => {
         var url = certificado.ruta_foto_certificado;
-        certificado.ruta_foto = `http://localhost:3000/${url}`;
+        certificado.ruta_foto = `https://apiportafolio.onrender.com/${url}`;
         return certificado;
       });
       res.status(200).json(certificados);

@@ -70,7 +70,7 @@ module.exports = {
       let paginas = await modeloPagina.getAll();
       paginas = paginas.map((pagina) => {
         var url = pagina.ruta_foto;
-        pagina.ruta_foto = `http://localhost:3000/${url}`;
+        pagina.ruta_foto = `https://apiportafolio.onrender.com/${url}`;
         return pagina;
       });
       res.status(200).json(paginas);
