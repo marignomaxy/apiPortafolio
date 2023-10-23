@@ -19,7 +19,7 @@ app.set("view engine", "jade");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://portafolio-lac-one.vercel.app/"],
+    origin: ["http://localhost:5173", "https://portafolio-lac-one.vercel.app"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "*",
   })
