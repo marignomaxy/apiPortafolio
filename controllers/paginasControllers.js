@@ -75,7 +75,7 @@ module.exports = {
       });
       res.status(200).json(paginas);
     } catch (error) {
-      res.status(500).json({ error: "Error interno del servidor" });
+      res.status(500).json({ error: "Error interno del servidor", error });
     }
   },
 
