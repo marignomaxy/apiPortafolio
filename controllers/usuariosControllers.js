@@ -24,12 +24,13 @@ module.exports = {
         const payload = {
           usuario: usuario.mail, // Cambia esto por los datos que desees incluir
         };
-        const secretKey = "2121";
+        const secretKey = process.env.SECRET_KEY;
         const options = {
           expiresIn: "1h", // Tiempo de expiración del token (por ejemplo, 1 hora)
         };
         const token = jwt.sign(payload, secretKey, options);
-        res.status(200).json(token);
+        console.log("Usuario:", usuario, " Token:", token);
+        res.status(200).json({ usuario, token });
       } else {
         res.status(401).json({ error: "Contraseña incorrecta" });
       }

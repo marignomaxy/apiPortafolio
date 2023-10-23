@@ -1,4 +1,5 @@
 var modeloCertificados = require("../models/certificadosModels");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   getByNombre: async function (req, res, next) {
@@ -14,25 +15,39 @@ module.exports = {
   },
 
   actualizarById: async function (req, res, next) {
+    const token = req.header("Authorization");
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Acceso no autorizado. Token no proporcionado." });
+    }
     try {
-      var id_cer = req.params.id;
-      if (req.file) {
-        const imagen = req.file;
-        const rutaRelativa = "uploads/" + imagen.filename;
-        console.log("ruta", rutaRelativa);
+      const secretKey = process.env.SECRET_KEY;
+      const decoded = jwt.verify(token, secretKey);
+      if (!decoded.usuario) {
+        return res
+          .status(401)
+          .json({ error: "Token no válido. Acceso no autorizado." });
+      } else {
+        var id_cer = req.params.id;
+        if (req.file) {
+          const imagen = req.file;
+          const rutaRelativa = "uploads/" + imagen.filename;
+          console.log("ruta", rutaRelativa);
+        }
+
+        const { nombre, descripcion, fecha_finalizacion, url } = req.body;
+
+        await modeloCertificados.actualizar({
+          id_cer,
+          nombre,
+          descripcion,
+          fecha_finalizacion,
+          url,
+          ruta_Foto: rutaRelativa,
+        });
+        res.status(200).json("Pagina Actualizada");
       }
-
-      const { nombre, descripcion, fecha_finalizacion, url } = req.body;
-
-      await modeloCertificados.actualizar({
-        id_cer,
-        nombre,
-        descripcion,
-        fecha_finalizacion,
-        url,
-        ruta_Foto: rutaRelativa,
-      });
-      res.status(200).json("Pagina Actualizada");
     } catch (error) {
       console.error("Error: ", error);
       res.status(500).json({ error: "Error interno del servidor" });
@@ -40,13 +55,26 @@ module.exports = {
   },
 
   deleteById: async function (req, res, next) {
+    const token = req.header("Authorization");
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Acceso no autorizado. Token no proporcionado." });
+    }
     try {
-      var id_cer = req.params.id;
-
-      await modeloCertificados.deleteById({
-        id_cer,
-      });
-      res.status(200).json("Certificado Eliminada");
+      const secretKey = process.env.SECRET_KEY;
+      const decoded = jwt.verify(token, secretKey);
+      if (!decoded.usuario) {
+        return res
+          .status(401)
+          .json({ error: "Token no válido. Acceso no autorizado." });
+      } else {
+        var id_cer = req.params.id;
+        await modeloCertificados.deleteById({
+          id_cer,
+        });
+        res.status(200).json("Certificado Eliminada");
+      }
     } catch (error) {
       console.error("Error: ", error);
       res.status(400).json({ error: "Error al intentar eliminar" });
@@ -69,23 +97,38 @@ module.exports = {
   },
 
   create: async function (req, res, next) {
+    const token = req.header("Authorization");
+    console.log("llego token", token);
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Acceso no autorizado. Token no proporcionado." });
+    }
     try {
-      // Obtén la imagen cargada por multer desde req.file
-      const imagen = req.file;
-      const rutaRelativa = "uploads/" + imagen.filename;
-      console.log("ruta", rutaRelativa);
+      const secretKey = process.env.SECRET_KEY;
+      const decoded = jwt.verify(token, secretKey);
+      if (!decoded.usuario) {
+        return res
+          .status(401)
+          .json({ error: "Token no válido. Acceso no autorizado." });
+      } else {
+        // Obtén la imagen cargada por multer desde req.file
+        const imagen = req.file;
+        const rutaRelativa = "uploads/" + imagen.filename;
+        console.log("ruta", rutaRelativa);
 
-      const { nombre, descripcion, fecha_finalizacion, url } = req.body;
-      console.log("nombre cert", nombre);
+        const { nombre, descripcion, fecha_finalizacion, url } = req.body;
+        console.log("nombre cert", nombre);
 
-      await modeloCertificados.create({
-        nombre,
-        descripcion,
-        fecha_finalizacion,
-        url,
-        ruta_foto_certificado: rutaRelativa,
-      });
-      res.status(201).json("Usuario Creado");
+        await modeloCertificados.create({
+          nombre,
+          descripcion,
+          fecha_finalizacion,
+          url,
+          ruta_foto_certificado: rutaRelativa,
+        });
+        res.status(201).json("Usuario Creado");
+      }
     } catch (error) {
       console.error("Error crear certificado", error);
       res.status(500).json({ error: "Error interno del servidor" });
