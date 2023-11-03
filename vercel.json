@@ -1,38 +1,9 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "app.js",
-      "use": "@vercel/node"
+      "source": "./(.*)",
+      "destination": "./"
     }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    {
-      "src": "/usuarios",
-      "dest": "/app.js"
-    },
-    {
-      "src": "/certificados",
-      "dest": "/app.js"
-    },
-    {
-      "src": "/paginas",
-      "dest": "/app.js"
-    },
-    {
-      "src": "/enviarEmail",
-      "dest": "/app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/app.js"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "PORT": 3000,
-    "USER_EMAIL": "tu_correo@gmail.com",
-    "PASS_EMAIL": "tu_contraseña_de_correo"
-  }
+  ]
 }
