@@ -1,14 +1,14 @@
 const { Pool } = require("pg");
 
-// Configura la conexión a la base de datos PostgreSQL (base de datos por defecto)
+
 const dbConfig = {
   user: process.env.USER_DB,
-  host: process.env.HOST_DB, // Puedes cambiar esto según la ubicación de tu base de datos
-  database: process.env.NOMBRE_DB, // Nombre de la base de datos
+  host: process.env.HOST_DB, 
+  database: process.env.NOMBRE_DB,
   password: process.env.PASS_DB,
-  port: 5432, // Puerto predeterminado de PostgreSQL
+  port: 5432,
   ssl: {
-    rejectUnauthorized: false, // Ajusta esto según tus necesidades de seguridad
+    rejectUnauthorized: false, 
   },
   connect_timeout: 10,
 };

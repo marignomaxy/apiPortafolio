@@ -12,12 +12,12 @@ router.post("/", async (req, res) => {
       pass: process.env.PASS_EMAIL,
     },
     tls: {
-      rejectUnauthorized: false, // Desactiva la verificación del certificado
+      rejectUnauthorized: false, 
     },
   });
 
   const mailOptions = {
-    from: email, // Utiliza la dirección de correo de la persona que envía el formulario
+    from: email, 
     to: "marignomaxy@gmail.com",
     subject: "Mensaje Portafolio",
     text: `
