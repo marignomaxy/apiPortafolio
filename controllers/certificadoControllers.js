@@ -102,6 +102,7 @@ module.exports = {
         // Obtén la imagen cargada por multer desde req.file
         const imagen = req.file
         const rutaRelativa = 'uploads/' + imagen.filename
+        console.log('ruta relativa', rutaRelativa)
 
         const { nombre, descripcion, fecha_finalizacion, url } = req.body
 
