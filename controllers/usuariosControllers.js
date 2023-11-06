@@ -7,7 +7,7 @@ async function compararContrasena(contrasenaIngresada, contrasenaEnBaseDeDatos) 
     return await bcrypt.compare(contrasenaIngresada, contrasenaEnBaseDeDatos)
   } catch (error) {
     console.error('Error al comparar contraseñas:', error)
-    return false 
+    return false
   }
 }
 
@@ -19,14 +19,14 @@ module.exports = {
 
       if (await compararContrasena(contraseña, usuario.contraseña)) {
         const payload = {
-          usuario: usuario.mail, 
+          usuario: usuario.mail,
         }
         const secretKey = process.env.SECRET_KEY
         const options = {
-          expiresIn: '1h', 
+          expiresIn: '1h',
         }
         const token = jwt.sign(payload, secretKey, options)
-        res.status(200).json({ usuario, token })
+        res.status(200).json('Usuario encontrado')
       } else {
         res.status(401).json({ error: 'Contraseña incorrecta' })
       }
