@@ -7,7 +7,7 @@ module.exports = {
       var nombreCerti = req.params.nombre
       let pagina = await modeloCertificados.getByNombre(nombreCerti)
       var url = pagina.ruta_foto
-      pagina.ruta_foto = `http://localhost:3000/${url}`
+      pagina.ruta_foto = `https://apiportafolio-production-5924.up.railway.app/${url}`
       res.status(200).json(pagina)
     } catch (error) {
       res.status(500).json({ error: 'Error interno del servidor' })
@@ -78,7 +78,7 @@ module.exports = {
       let certificados = await modeloCertificados.getAll()
       certificados = certificados.map((certificado) => {
         var url = certificado.ruta_foto_certificado
-        certificado.ruta_foto = `https://apiportafolio.onrender.com/${url}`
+        certificado.ruta_foto = `https://apiportafolio-production-5924.up.railway.app/${url}`
         return certificado
       })
       res.status(200).json(certificados)
