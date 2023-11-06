@@ -1,5 +1,4 @@
 var modeloPagina = require('../models/paginasModels')
-const jwt = require('jsonwebtoken')
 
 module.exports = {
   getByNombre: async function (req, res, next) {
@@ -16,6 +15,7 @@ module.exports = {
 
   deleteById: async function (req, res, next) {
     const token = req.header('Authorization')
+    console.log('llego token', token)
     if (!token) {
       return res.status(401).json({ error: 'Acceso no autorizado. Token no proporcionado.' })
     }
@@ -40,6 +40,7 @@ module.exports = {
 
   actualizarById: async function (req, res, next) {
     const token = req.header('Authorization')
+    console.log('llego token', token)
     if (!token) {
       return res.status(401).json({ error: 'Acceso no autorizado. Token no proporcionado.' })
     }
@@ -100,6 +101,7 @@ module.exports = {
 
   create: async function (req, res, next) {
     const token = req.header('Authorization')
+    console.log('llego token', token)
     if (!token) {
       return res.status(401).json({ error: 'Acceso no autorizado. Token no proporcionado.' })
     }
