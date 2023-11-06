@@ -1,5 +1,4 @@
 var modeloPagina = require('../models/paginasModels')
-const jwt = require('jsonwebtoken')
 
 module.exports = {
   getByNombre: async function (req, res, next) {
