@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apirest.portafolio.authentication.AuthenticationRequest;
 import com.apirest.portafolio.authentication.AuthenticationResponse;
 import com.apirest.portafolio.authentication.AuthenticationService;
-import com.apirest.portafolio.authentication.RegisterRequest;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,12 +19,6 @@ import com.apirest.portafolio.authentication.RegisterRequest;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.register(request));
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request) {
