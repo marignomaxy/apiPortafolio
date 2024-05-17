@@ -12,6 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "paginas")
+
 public class Pagina {
 
     @Id
@@ -35,8 +36,8 @@ public class Pagina {
     @Column(name = "fecha")
     private Date fecha;
 
-    @Column(name = "url_portafolio")
-    private String url_portafolio;
+    @Column(name = "url_repositorio")
+    private String url_repositorio;
 
     @Column(name = "url_pagina")
     private String url_pagina;

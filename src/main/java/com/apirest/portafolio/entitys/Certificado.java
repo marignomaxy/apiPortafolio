@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "certificados")
 public class Certificado {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_certificado")
     private Integer id;
-
     @Column(name = "titulo_certificado")
     private String titulo_certificado;
 

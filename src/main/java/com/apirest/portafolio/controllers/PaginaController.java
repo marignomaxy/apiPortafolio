@@ -18,6 +18,7 @@ import com.apirest.portafolio.services.IPaginaService;
 import com.apirest.portafolio.services.ITecnologiaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -60,6 +61,7 @@ public class PaginaController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> guardarPagina(
             @RequestPart("pagina") String paginaJson,
@@ -113,6 +115,7 @@ public class PaginaController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{id}")
     public ResponseEntity<?> putPagina(@PathVariable("id") Integer id, @RequestBody Pagina pagina) {
         try {
@@ -128,6 +131,7 @@ public class PaginaController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePagina(@PathVariable("id") Integer id) throws ResourceNotFoundException {
         try {

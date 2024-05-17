@@ -29,6 +29,7 @@ import com.apirest.portafolio.exceptions.ResourceNotFoundException;
 import com.apirest.portafolio.services.ICertificadoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -70,6 +71,7 @@ public class CertificadoController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> guardarPagina(
             @RequestPart("certificado") String certificadoJson,
@@ -111,6 +113,7 @@ public class CertificadoController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{id}")
     public ResponseEntity<?> putCertificado(@PathVariable("id") Integer id, @RequestBody Certificado certificado) {
         try {
@@ -127,6 +130,7 @@ public class CertificadoController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePagina(@PathVariable("id") Integer id) throws ResourceNotFoundException {
         try {

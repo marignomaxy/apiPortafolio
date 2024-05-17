@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "tecnologias")
+
 public class Tecnologia {
 
     public Tecnologia(Integer id) {
